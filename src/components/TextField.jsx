@@ -2,18 +2,22 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchingText, selectText } from "../reducers/textSlice";
 import { useEffect, useState } from "react";
 import { keyPressed } from "../reducers/textSlice";
+import Statistics from "./Statistic";
 
 
 
 function TextField(){
-    const successfull = useSelector(state => state.text.successed)
     const dispatch = useDispatch();
+    const successfull = useSelector(state => state.text.successed)
     const text = useSelector(state => state.text.text);
     const textStatus = useSelector((state) => state.text.status);
+    let arrayOfWords;
+    let listOfWords;
     let arrayOfChars;
     let listOfChars; 
     
     if (textStatus == 'succeeded') {
+        
         arrayOfChars = text.split('');
         listOfChars = arrayOfChars.map((char, index) => {
         if (index < successfull) {
@@ -25,6 +29,8 @@ function TextField(){
         }
     })
     };
+
+    console.log(arrayOfWords)
 
     const handleKeyPress = (event) => {
         const pressedKey = event.key
@@ -55,22 +61,6 @@ function TextField(){
     )
 }
 
-function Statistics(){
-    const accuracy = useSelector(state => state.text.accuracy);
-    const speed = useSelector(state => state.text.speed);
 
-    return (
-        <div>
-            <div>
-                <span className="name">Точность</span>
-                <span>{Math.floor(accuracy)}</span>
-            </div>
-            <div>
-                <span className="name">Скорость</span>
-                <span>{Math.floor(speed)}</span>
-            </div>
-        </div>
-    )
-}
 
 export default TextField;

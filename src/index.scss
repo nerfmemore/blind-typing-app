@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+html {
+    font-family: 'Roboto Mono';
+    font-size: 16px;
+}
+
 .wrapper {
     width: 50%;
     margin: 0 auto;
@@ -5,17 +12,21 @@
 }
 
 .key_success {
+    font-size: 2rem;
     background-color: blue;
 }
 
 .key_active {
+    font-size: 2rem;
     background-color: green;
 }
 
 .key_failed {
+    font-size: 2rem;
     background-color: red;
 }
 
 .key_default {
+    font-size: 2rem;
     background-color: wheat;
 }
