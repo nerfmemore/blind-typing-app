@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { fetchingText, selectText } from "../reducers/textSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { keyPressed } from "../reducers/textSlice";
 import Statistics from "./Statistic";
 
@@ -11,6 +11,7 @@ function TextField(){
     const successfull = useSelector(state => state.text.successed)
     const text = useSelector(state => state.text.text);
     const textStatus = useSelector((state) => state.text.status);
+    const hiddenInputRef = useRef(null);
     let arrayOfWords;
     let listOfWords;
     let arrayOfChars;
@@ -30,7 +31,11 @@ function TextField(){
     })
     };
 
-    console.log(arrayOfWords)
+    const focusHiddenInput = () => {
+        if (hiddenInputRef.current) {
+            hiddenInputRef.current.focus();
+        }
+    }
 
     const handleKeyPress = (event) => {
         const pressedKey = event.key
@@ -49,13 +54,15 @@ function TextField(){
         if (textStatus === 'idle') {
             dispatch(fetchingText())
         }
+        focusHiddenInput();
     }, [textStatus, dispatch]);
 
     return (
         <>
-            <div className="wrapper">
+            <div onClick={focusHiddenInput} className="wrapper">
                 <p className="page">{listOfChars}</p>
                 <Statistics />
+                <input className="hidden_input" type="text" ref={hiddenInputRef} />
             </div>
         </>
     )

@@ -5,8 +5,8 @@ const initialState = {
     text: {},
     status: 'idle',
     error: null,
-    startTime: new Date(),
-    timeElapse: new Date(),
+    startTime: new Date().toISOString(),
+    timeElapse: new Date().toISOString(),
     words: 0,
     wpm: 0,
     keydowns: 0,
@@ -33,7 +33,7 @@ const textSlice = createSlice({
             state.keydowns += 1;
             
             const currentTime = new Date();
-            const timeElapsed = (currentTime - state.startTime) / 1000 / 60;
+            const timeElapsed = (currentTime - new Date(state.startTime)) / 1000 / 60;
             state.timeElapse = timeElapsed;
 
             state.words += (key && chars[state.successed] == ' ') ? 1 : 0;

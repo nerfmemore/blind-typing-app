@@ -18,6 +18,12 @@ html {
     color: #e2b714;
 }
 
+.hidden_input {
+    position: absolute;
+    top: -1000px;
+    opacity: 0;
+}
+
 span {
     font-size: 2rem;
 }
