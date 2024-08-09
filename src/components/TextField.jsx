@@ -43,10 +43,13 @@ function TextField(){
     };
 
     useEffect(() => {
-        window.addEventListener('keypress', handleKeyPress);
+        const hiddenInput = hiddenInputRef.current;
+        hiddenInput.addEventListener('keypress', handleKeyPress);
+        
 
         return () => {
-            window.removeEventListener('keypress', handleKeyPress);
+            hiddenInput.removeEventListener('keypress', handleKeyPress);
+            
         }
     }, [arrayOfChars]);
 
