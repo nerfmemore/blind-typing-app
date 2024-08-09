@@ -3,30 +3,92 @@
 html {
     font-family: 'Roboto Mono';
     font-size: 16px;
+    background-color: #323437;
 }
 
 .wrapper {
     width: 50%;
     margin: 0 auto;
-
+    margin-top: 5%;
 }
 
-.key_success {
-    font-size: 2rem;
-    background-color: blue;
+.inner {
+    display: flex;
+    justify-content: space-between;
+    color: #e2b714;
 }
 
-.key_active {
+span {
     font-size: 2rem;
-    background-color: green;
 }
 
-.key_failed {
-    font-size: 2rem;
-    background-color: red;
+
+.key{
+    color: #646669;
+    &_success {
+        color: #d1d0c5;
+    }
+    &_active {
+        background-color: #e2b714;
+    }
+    &_failed {
+        color: #ca4754;
+    }
+    &_default {
+
+    }
 }
 
-.key_default {
-    font-size: 2rem;
-    background-color: wheat;
+.page {
+    white-space: pre-wrap;
+}
+
+.succeess {
+    font-size: 2.5rem;
+    
+}
+
+.name {
+    font-size: 1.5rem;
+}
+
+.property {
+    font-size: 1.5rem;
+}
+
+.button_restart {
+    margin-top: 1rem;
+    padding: 0.25rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    color: #323437;
+    background-color: #e2b714;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1500px) {
+
+    .name {
+        font-size: 1rem;
+    }
+    
+    .property {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    span {
+        font-size: 1.5rem;
+    }
+
+    .succeess {
+        font-size: 2rem;
+    }
+
+    .inner {
+        flex-direction: column; 
+        gap: 1rem; 
+    }
 }

@@ -54,7 +54,7 @@ function TextField(){
     return (
         <>
             <div className="wrapper">
-                {listOfChars}
+                <p className="page">{listOfChars}</p>
                 <Statistics />
             </div>
         </>

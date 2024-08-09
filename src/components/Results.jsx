@@ -12,10 +12,10 @@ function Results(){
 
     return (
         <>
-            <div>
-                <span>Поздравляем с успешным прохождением теста! Ваши результаты:</span>
+            <div className="wrapper">
+                <p className="succeess">Поздравляем с успешным прохождением теста! <br />Ваши результаты:</p>
                 <Statistics />
-                <button onClick={() => handleRestart()}>Перезапуск</button>
+                <button className="button_restart" onClick={() => handleRestart()}>Перезапуск</button>
             </div>
         </>
     )

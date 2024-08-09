@@ -7,18 +7,18 @@ function Statistics(){
     const wordPerMinute = useSelector(state => state.text.wpm);
 
     return (
-        <div>
-            <div>
+        <div className="inner">
+            <div className="">
                 <span className="name">Точность: </span>
-                <span>{Math.floor(accuracy)}</span>
+                <span className="property">{Math.floor(accuracy)}</span>
             </div>
             <div>
                 <span className="name">Символов в минуту: </span>
-                <span>{Math.floor(charsPerMinute)}</span>
+                <span className="property">{Math.floor(charsPerMinute)}</span>
             </div>
             <div>
                 <span className="name">Слов в минуту: </span>
-                <span>{Math.floor(wordPerMinute)}</span>
+                <span className="property">{Math.floor(wordPerMinute)}</span>
             </div>
         </div>
     )
