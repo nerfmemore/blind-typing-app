@@ -5,6 +5,7 @@ const initialState = {
     text: {},
     status: 'idle',
     error: null,
+    startTime: new Date(),
     keydowns: 0,
     successed: 0,
     accuracy: 0,
@@ -25,8 +26,13 @@ const textSlice = createSlice({
             const chars = state.text.split('');
             const key = action.payload.pressedKey;
             state.successed += key == chars[state.successed] ? 1 : 0;
-            console.log(chars[state.successed])
             state.keydowns += 1;
+            
+            const currentTime = new Date();
+            const timeElapsed = (currentTime - state.startTime) / 1000 / 60;
+
+            state.accuracy = state.successed / state.keydowns * 100;
+            state.speed = state.successed / timeElapsed;
         }
     },
     extraReducers(builder) {

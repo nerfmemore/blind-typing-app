@@ -6,9 +6,6 @@ import { keyPressed } from "../reducers/textSlice";
 
 
 function TextField(){
-    const [allKeydowns, setKeydowns] = useState(0);
-    const [successfullKeypresses, setSeccessfullKeypresses] = useState(0);
-    const [mountedDate, setDate] = useState(new Date());
     const successfull = useSelector(state => state.text.successed)
     const dispatch = useDispatch();
     const text = useSelector(state => state.text.text);
@@ -52,29 +49,25 @@ function TextField(){
         <>
             <div className="wrapper">
                 {listOfChars}
-                
+                <Statistics />
             </div>
         </>
     )
 }
 
-function Statistics(props){
-    const successes = props.successfullKeypresses;
-    const keyPresses = props.allKeydowns;
-    const mountedDate = props.mountedDate;
-
-    let calculatedPresses = successes / keyPresses * 100;
-    let calculatedSpeed = successes / (new Date() - mountedDate) * 1000 * 60;
+function Statistics(){
+    const accuracy = useSelector(state => state.text.accuracy);
+    const speed = useSelector(state => state.text.speed);
 
     return (
         <div>
             <div>
                 <span className="name">Точность</span>
-                <span>{Math.floor(calculatedPresses)}</span>
+                <span>{Math.floor(accuracy)}</span>
             </div>
             <div>
                 <span className="name">Скорость</span>
-                <span>{calculatedSpeed}</span>
+                <span>{Math.floor(speed)}</span>
             </div>
         </div>
     )
