@@ -13,6 +13,7 @@ function TextField(){
     const textStatus = useSelector((state) => state.text.status);
     const lastInput = useSelector(state => state.text.lastInput);
     const hiddenInputRef = useRef(null);
+    const [isFocused, setIsFocused] = useState(true);
     let arrayOfChars;
     let listOfChars; 
     
@@ -32,6 +33,14 @@ function TextField(){
         }
     })
     };
+
+    const focusField = () => {
+        setIsFocused(true);
+    }
+
+    const blurField = () => {
+        setIsFocused(false);
+    }
 
     const focusHiddenInput = () => {
         if (hiddenInputRef.current) {
@@ -57,10 +66,14 @@ function TextField(){
 
     return (
         <>
-            <div onClick={focusHiddenInput} className="wrapper">
-                <p className="page">{listOfChars}</p>
-                <Statistics />
+            <div onClick={focusHiddenInput}  onFocus={focusField} onBlur={blurField} className='wrapper'>
+                {isFocused ? null : <p className="blur_message">Press to start typing</p>}
+                <div className={isFocused ? '' : 'blur'}>
+                    <p className="page">{listOfChars}</p>
+                    <Statistics />
+                </div>
                 <input className="hidden_input" type="text" ref={hiddenInputRef} onChange={handleKeyPress}/>
+                
             </div>
         </>
     )

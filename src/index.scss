@@ -7,9 +7,22 @@ html {
 }
 
 .wrapper {
+    position: relative;
     width: 50%;
     margin: 0 auto;
     margin-top: 5%;
+}
+
+.blur {
+    position: relative;
+    filter: blur(4px);
+
+    &_message {
+        position: absolute;
+        top: 35%;
+        left: 30%;
+        color: #d1d0c5;
+    }
 }
 
 .inner {
