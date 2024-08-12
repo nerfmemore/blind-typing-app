@@ -7,6 +7,7 @@ const initialState = {
     error: null,
     startTime: new Date().toISOString(),
     timeElapse: new Date().toISOString(),
+    lastInput: '',
     words: 0,
     wpm: 0,
     keydowns: 0,
@@ -31,6 +32,7 @@ const textSlice = createSlice({
             const key = action.payload.pressedKey;
             state.successed += key == chars[state.successed] ? 1 : 0;
             state.keydowns += 1;
+            state.lastInput = key;
             
             const currentTime = new Date();
             const timeElapsed = (currentTime - new Date(state.startTime)) / 1000 / 60;

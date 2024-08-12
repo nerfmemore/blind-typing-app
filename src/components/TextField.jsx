@@ -11,19 +11,21 @@ function TextField(){
     const successfull = useSelector(state => state.text.successed)
     const text = useSelector(state => state.text.text);
     const textStatus = useSelector((state) => state.text.status);
+    const lastInput = useSelector(state => state.text.lastInput);
     const hiddenInputRef = useRef(null);
-    let arrayOfWords;
-    let listOfWords;
     let arrayOfChars;
     let listOfChars; 
     
     if (textStatus == 'succeeded') {
-        
+
         arrayOfChars = text.split('');
         listOfChars = arrayOfChars.map((char, index) => {
         if (index < successfull) {
            return <span className="key_success" key={index}>{char}</span>
         } else if (index === successfull) {
+            if (lastInput != '' && lastInput != arrayOfChars[index - 1]) {
+                return <span className="key_failed" key={index}>{char}</span>
+            }
             return <span className="key_active" key={index}>{char}</span>
         } else if (index > successfull) {
             return <span className="key_default" key={index}>{char}</span>
@@ -38,26 +40,19 @@ function TextField(){
     }
 
     const handleKeyPress = (event) => {
-        const pressedKey = event.key
-        dispatch(keyPressed({pressedKey}))
+        const pressedKey = event.nativeEvent.data
+        
+        if(pressedKey.length === 1) {
+            dispatch(keyPressed({pressedKey}))
+        }
     };
 
     useEffect(() => {
-        const hiddenInput = hiddenInputRef.current;
-        hiddenInput.addEventListener('keypress', handleKeyPress);
-        
-
-        return () => {
-            hiddenInput.removeEventListener('keypress', handleKeyPress);
-            
-        }
-    }, [arrayOfChars]);
-
-    useEffect(() => {
         if (textStatus === 'idle') {
-            dispatch(fetchingText())
+            dispatch(fetchingText());
+            focusHiddenInput();
         }
-        focusHiddenInput();
+        
     }, [textStatus, dispatch]);
 
     return (
@@ -65,7 +60,7 @@ function TextField(){
             <div onClick={focusHiddenInput} className="wrapper">
                 <p className="page">{listOfChars}</p>
                 <Statistics />
-                <input className="hidden_input" type="text" ref={hiddenInputRef} />
+                <input className="hidden_input" type="text" ref={hiddenInputRef} onChange={handleKeyPress}/>
             </div>
         </>
     )
